@@ -9,6 +9,17 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+      routes:
+        - id: method_route
+          uri: lb://user-service
+          predicates:
+            - Path=/test
+            - Method=GET
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
 eureka:
   client:
     service-url:
