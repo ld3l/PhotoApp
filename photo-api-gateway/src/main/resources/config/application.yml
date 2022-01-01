@@ -13,8 +13,10 @@ spring:
         - id: method_route
           uri: lb://user-service
           predicates:
-            - Path=/test
+            - Path=/banking/u
             - Method=GET
+          filters:
+            - RewritePath=/banking/u, /test
 
 logging:
   level:
