@@ -1,6 +1,8 @@
 server:
   port: 8000
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: api-gateway
   cloud:
@@ -26,3 +28,5 @@ eureka:
   client:
     service-url:
       default-zone: http://localhost:8761/eureka
+token:
+  secret: orguihj9238fr4tiufg429ui8hf2
