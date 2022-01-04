@@ -10,4 +10,5 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     UserEntity createUserModelToUserEntity(CreateUserModel model);
+    UserDto userEntityToUserDto(UserEntity user);
 }
