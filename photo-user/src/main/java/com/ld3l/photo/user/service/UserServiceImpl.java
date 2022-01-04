@@ -1,5 +1,6 @@
 package com.ld3l.photo.user.service;
 
+import com.ld3l.photo.user.domain.dto.UserDto;
 import com.ld3l.photo.user.domain.entity.UserEntity;
 import com.ld3l.photo.user.domain.model.CreateUserModel;
 import com.ld3l.photo.user.mapper.UserMapper;
@@ -21,5 +22,10 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         UserEntity userEntity = userMapper.createUserModelToUserEntity(user);
         return userRepository.save(userEntity).getId();
+    }
+
+    @Override
+    public UserDto getUserByEmail(String email) {
+        return userMapper.userEntityToUserDto(userRepository.findByEmail(email));
     }
 }
