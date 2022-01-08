@@ -15,24 +15,26 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
 @EnableWebFluxSecurity
+@AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private Environment environment;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/user-service/login").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                .anyRequest().authenticated().and().csrf().disable()
                 .addFilter(new AuthFilter(authenticationManager(), environment));
     }
 
+
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-        return http.csrf().disable().build();
+        return http.csrf().disable().authorizeExchange().pathMatchers(HttpMethod.POST, "/user-service/login").permitAll().anyExchange().authenticated().and().build();
     }
+
+
 }
