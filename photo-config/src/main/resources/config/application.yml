@@ -1,5 +1,11 @@
 spring:
   application:
     name: photo-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ld3l/PhotoAppConfiguration.git
+
 server:
   port: 8070
